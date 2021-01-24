@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %} Страница пользователя
+    {{ author.get_full_name }} {% endblock %}
+{% block header %}<h1 class="text-center">Страница
+    пользователя<br>{{ author.get_full_name }}</h1>  {% endblock %}
+{% block content %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-3 mb-3 mt-1">
+                <div class="card">
+                    <!-- left side  -->
+                    {% include "includes/sidecard.html" %}
+                    <!-- following  -->
+                    {% if request.user != author %}
+                        <li class="list-group-item">
+                            {% include "includes/followingcard.html" %}
+                        </li>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <!-- Вывод ленты записей -->
+                {% for post in page %}
+                    {% include "includes/post_item.html" with post=post %}
+                {% endfor %}
+
+                <!-- Здесь постраничная навигация паджинатора -->
+                {% include "paginator.html" %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

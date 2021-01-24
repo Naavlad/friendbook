@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %} Страница поста {% endblock %}
+{% block content %}
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-3 mb-3 mt-1">
+                <div class="card">
+                    {% include "includes/sidecard.html" %}
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                {% include "includes/post_item.html" with post=post %}
+                {% include "includes/comments.html" %}
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

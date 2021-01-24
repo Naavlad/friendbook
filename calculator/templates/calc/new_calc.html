@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card-body">
+        <div class="card m-4">
+            <form action="{% url "new_calc" %}"
+                  method="post">
+                {% csrf_token %}
+                <h5 class="card-header"><i class="far fa-calendar-plus"></i>&nbsp;Добавить
+                    запись:</h5>
+                <div class="card-body">
+                    {{ form.amount }} <br>
+                    {{ form.text_comment }}<br>
+                    <button type="submit" class="btn btn-primary">Добавить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

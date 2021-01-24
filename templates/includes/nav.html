@@ -1,0 +1,18 @@
+<nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand text-white font-weight-bold" href="{% url 'index' %}">FriendBook</a>
+
+    <nav class="my-2 my-md-0 mr-md-3 text-white">
+        {% if user.is_authenticated %}
+
+             <span class="btn btn-primary"><i class="far fa-smile"></i>&nbsp; {{ user.username }} </span>
+            <a class="btn btn-primary font-weight-bold" href="{% url 'new_post' %}"><i class="far fa-comment-alt"></i>&nbsp; Новая
+                запись</a>
+            <a class="btn btn-primary" href="{% url 'password_change' %}"><i class="far fa-edit"></i>&nbsp;Изменить
+                пароль</a>
+            <a class="btn btn-primary" href="{% url 'logout' %}">&nbsp;Выйти</a>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'login' %}"><i class="far fa-arrow-alt-circle-right"></i>&nbsp;Войти</a>
+            <a class="btn btn-primary" href="{% url 'signup' %}"><i class="far fa-edit"></i>&nbsp;Регистрация</a>
+        {% endif %}
+    </nav>
+</nav>

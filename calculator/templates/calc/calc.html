@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %} Calculator {% endblock %}
+{% block header %}<br>
+    <h1 class="text-center"> Бюджетный калькулятор </h1>
+    <br> {% endblock %}
+{% block content %}
+
+    <div class="container">
+        <div class="card-body">
+            {% include "includes/menu.html" with calc=True %}
+        </div>
+
+
+        <div class="row">
+
+            <div class="card-body col-3">
+                <div class="card-body font-weight-bold text-center">
+                    Ограничение расходов: {{ cash_limit }} руб.
+                </div>
+                <div class="card-body">
+                    <ul>Сегодня: {{ today_sum }} руб.</ul>
+                    <ul>За неделю: {{ week_sum.amount__sum }} руб.</ul>
+
+                </div>
+            </div>
+
+            <div class="card-body col-9">
+
+                <div class="row">
+                    <div class="text-center">
+                        <div class="card-body">
+                            <a class="btn btn-primary"
+                               href="{% url 'new_calc' %}"
+                               role="button">
+                                Создать запись калькулятора
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="btn border-dark" style="width: 25rem; ">
+                            {{ cash_message }}
+                        </div>
+                    </div>
+                </div>
+
+                {% for item in page %}
+                    <div class="card">
+                        <div class="card-body">
+                            {{ item.amount }}
+                            на {{ item.text_comment|linebreaksbr }}
+                            <div class="text-right">
+                                <small class="text-muted">{{ item.created }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Вывод паджинатора -->
+    {% if page.has_other_pages %}
+        {% include "paginator.html" with items=page paginator=paginator %}
+    {% endif %}
+
+{% endblock %}
